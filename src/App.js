@@ -1,25 +1,47 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar.js';
+import ProductList from './components/ProductList.js';
+import React, { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const initialProductList = [
+    {
+      price: 9999,
+      name: "Iphone 10S Max",
+      quantity: 0,
+    },
+    {
+      price: 9999,
+      name: "Redmi Note 10S Max",
+      quantity: 0,
+    }
+  ]
+  const [productList, setProductList] = useState(initialProductList)
 
+  const incrementQuantity = (index) => {
+    let newProductList = [...productList]
+    newProductList[index].quantity++
+    setProductList(newProductList);
+  }
+
+  const decrementQuantity = (index) => {
+    const newProductList = [...productList];
+
+    if (newProductList[index].quantity > 0) {
+      newProductList[index].quantity--;
+      setProductList(newProductList);
+    }
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <main className='container' style={{ marginTop: '80px' }}>
+        <ProductList products={productList} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} />
+      </main>
+      {/* <Footer /> */}
+    </div>
+  )
+}
 export default App;
