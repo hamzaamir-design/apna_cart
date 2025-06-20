@@ -1,23 +1,28 @@
-import React from 'react'
+import React from 'react';
 
 export default function Product1(props) {
+  const { product, index, incrementQuantity, decrementQuantity, removeItem } = props;
 
-    return (
-        <div className='row'>
-            <div className='col-5'>
-                <h2>{props.product.name}<span class="badge text-bg-secondary">
-                    ₹{props.product.price}</span></h2>
-            </div>
-            <div className="col-3">
-                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" class="btn btn-danger" onClick={() => {props.decrementQuantity(props.index)}}>-</button>
-                    <button type="button" class="btn btn-warning">{props.product.quantity}</button>
-                    <button type="button" class="btn btn-success" onClick={() => { props.incrementQuantity(props.index) }}>+</button>
-                </div>
-            </div>
-            <div className="col-4">
-                {props.product.quantity * props.product.price}
-            </div>
+  return (
+    <div className="card p-3 mb-3 shadow-sm">
+      <div className="row align-items-center">
+        <div className="col-md-5">
+          <h4>{product.name} <span className="badge bg-secondary">₹{product.price}</span></h4>
         </div>
-    )
+        <div className="col-md-3">
+          <div className="btn-group" role="group">
+            <button className="btn btn-danger" onClick={() => decrementQuantity(index)}>-</button>
+            <button className="btn btn-warning">{product.quantity}</button>
+            <button className="btn btn-success" onClick={() => incrementQuantity(index)}>+</button>
+          </div>
+        </div>
+        <div className="col-md-2">
+          ₹{product.quantity * product.price}
+        </div>
+        <div className="col-md-2 text-end">
+          <button className="btn btn-outline-danger" onClick={() => removeItem(index)}>Remove</button>
+        </div>
+      </div>
+    </div>
+  );
 }
